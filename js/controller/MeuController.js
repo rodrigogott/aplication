@@ -1,36 +1,54 @@
 myApp.controller('MeuController', function($scope){
 	$scope.pessoa = {};
-	$scope.dados = [{
-		nome : 'Rodrigog',
-		telefone : '(46)991059091',
-		email : 'rodrigo.gott123@gmail.coms'
-	},{
-		nome : 'teste145',
-		telefone : '(46)99105999',
-		email: 'teste@gmail.com'
-	},{
-		nome : 'teste2',
-		telefone : '(46)99105900',
-		email : 'teste2@gmail.com'
-		},{
-		nome : 'teste3',
-		telefone : '(46)99105900',
-		email : 'teste2@gmail.com'
-	}];
+	$scope.isEdit = false;
+	$scope.dados = []
 
 
-	
+	//salvar dados
 	$scope.enviaDados = function(pessoa){
-		
 
-		if(pessoa.nome.length > 2 &&  pessoa.telefone.length > 7 && pessoa.email.length > 4){
+		if($scope.isEdit){
+			$scope.atualizaDados(pessoa);
+		} else {
+
+		//if(pessoa.nome.length > 2 &&  pessoa.telefone.length > 7 && pessoa.email.length > 4){
 
 		var minhaPessoa = angular.copy(pessoa);
 		$scope.dados.push(minhaPessoa);
 
+		delete $scope.pessoa;
+	}
 	
 	}
-		
-		 
+	//excluir dados
+	$scope.excluirDados = function(item){
+		$scope.dados.splice(item, 1);
+	}
+		$scope.cancelaDados = function(pesoa){
+		delete $scope.pessoa;
 	}	
+	//editar dados
+	$scope.editarDados = function(item, idx){
+		$scope.pessoa = angular.copy(item);
+		$scope.idx = idx;
+		$scope.isEdit = true;
+
+	}
+	$scope.atualizaDados = function(data){
+	 	$scope.isEdit = false;
+		$scope.dados[$scope.idx] = angular.copy(data);
+		delete $scope.pessoa;
+	}
+
+	
+	
 })	
+
+
+
+
+
+
+
+
+
