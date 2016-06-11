@@ -26,6 +26,7 @@ myApp.controller('MeuController', function($scope){
 	}
 		$scope.cancelaDados = function(pesoa){
 		delete $scope.pessoa;
+		$scope.isEdit = false;
 	}	
 	//editar dados
 	$scope.editarDados = function(item, idx){
